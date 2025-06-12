@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Prueba Pulzo
 
 El repositorio cuenta con la prueba solicitada del servicio para el cargo de desarrollador backend en Pulzo.com 
@@ -89,3 +90,6 @@ Se podra evidenciar una visualizacion basica en el endpoint http://localhost:808
 Siempre estoy abierto al networking y a oportunidades profesionales. 
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nicolas-david-pardo-betancourth/)
+=======
+# PruebaPulzo
+>>>>>>> 88251d0565b9d271ec0628caaebbd45facd5b929
