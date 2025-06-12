@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rick and Morty Characters</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        button { padding: 10px 15px; background: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background: #45a049; }
+        #characters { margin-top: 20px; }
+        .character { border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Rick and Morty Characters</h1>
+    
+    <button onclick="generateToken()">Generate Token</button>
+    <button onclick="getCharacters()">Get Characters</button>
+    
+    <div id="tokenInfo"></div>
+    <div id="error" class="error"></div>
+    
+    <div id="characters"></div>
+    
+    <script>
+        let currentToken = null;
+        
+        function generateToken() {
+            axios.post('/generate-token')
+                .then(response => {
+                    currentToken = response.data.token;
+                    document.getElementById('tokenInfo').innerHTML = 
+                        `<p>Token Generado! tienes usos: 5</p>`;
+                    document.getElementById('error').innerHTML = '';
+                })
+                .catch(error => {
+                    document.getElementById('error').innerHTML = 
+                        `Error generating token: ${error.response?.data?.error || error.message}`;
+                });
+        }
+        
+        function getCharacters() {
+            if (!currentToken) {
+                document.getElementById('error').innerHTML = 'Please generate a token first';
+                return;
+            }
+            
+            axios.get('/characters', {
+                headers: {
+                    'Authorization': `Bearer ${currentToken}`
+                }
+            })
+            .then(response => {
+                document.getElementById('error').innerHTML = '';
+                const characters = response.data.results;
+                let html = '<h2>Characters:</h2>';
+                
+                characters.slice(0, 10).forEach(character => {
+                    html += `
+                        <div class="character">
+                            <h3>${character.name}</h3>
+                            <p>Status: ${character.status}</p>
+                            <p>Species: ${character.species}</p>
+                            <img src="${character.image}" width="100">
+                        </div>
+                    `;
+                });
+                
+                document.getElementById('characters').innerHTML = html;
+                
+                // Update uses left
+                const usesLeft = 5 - (response.config.headers['X-Token-Uses'] || 0);
+                document.getElementById('tokenInfo').innerHTML = 
+                    `<p>Token uses left: ${usesLeft}</p>`;
+            })
+            .catch(error => {
+                document.getElementById('error').innerHTML = 
+                    `Error: ${error.response?.data?.error || error.message}`;
+                if (error.response?.status === 403) {
+                    document.getElementById('tokenInfo').innerHTML = 
+                        '<p>Token ha expirado</p>';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
