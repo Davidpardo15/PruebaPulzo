@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Prueba Pulzo
 
 El repositorio cuenta con la prueba solicitada del servicio para el cargo de desarrollador backend en Pulzo.com 
@@ -68,21 +68,21 @@ Prueba Pulzo
 
 * El endpoint localhost:8080/generate-token se genera el token aleatorio con una peticion **POST**
 
-![This is an alt text.](/image/sample.webp "This is a sample image.")
+![This is an alt text.](/assets/1.png")
 
 * El endpoint http://localhost:8080/characters en el header creamos Authorization y el valor sera el token dado en el anterior punto, se realiza con una peticion **GET**
 
-![This is an alt text.](/image/sample.webp "This is a sample image.")
+![This is an alt text.](//assets/2.png")
 
 * Una vez la consulta se realice 5 veces con el mismo token devolvera un mensaje de "Token ha expirado (uso maximo)"
 
-![This is an alt text.](/image/sample.webp "This is a sample image.")
+![This is an alt text.](/assets/3.png")
 
 **Adicional**
 
 Se podra evidenciar una visualizacion basica en el endpoint http://localhost:8080/ se mostraran dos botones uno para generar el token y otra para realizar la consulta.
 
-![This is an alt text.](/image/sample.webp "This is a sample image.")
+![This is an alt text.](/assets/4.png")
 
 ### 📇 Conoce un poco mas de mi en LinkedIn
 
